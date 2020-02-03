@@ -1,0 +1,49 @@
+<div class="row">
+
+  <div class="col-12 col-lg-8">
+    <h1 class="h1-strong">
+      Conocer gente
+    </h1>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link " routerLinkActive="active" [routerLink]="['/people',previousPage]">Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" routerLinkActive="active" [routerLink]="['/people',nextPage]">Next</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="people ml-4">
+      <div class="row">
+        <div class="col-6 col-lg-3" *ngFor="let user of users">
+          <div class="card">
+            <img class="card-img-top"
+                 [src]="getPathImage(user.image)"
+                 alt="Card image" style="width: 100%; height: 250px">
+            <div class="card-body ">
+              <h6 class="card-title text-center font-weight-bold">{{user.nick | uppercase}}</h6>
+              <p class="">{{user.getFullName() }}</p>
+              <div class="text-center">
+                <button class="btn btn-outline-success mr-1 title-success"
+                        [disabled]="user._id === authenticatedUser._id"
+                        aria-label="Seguir"
+                        *ngIf="enableAddFollow(user._id)" (click)="onFollowUser(user._id)">
+                  <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="btn btn-outline-danger mr-1 title-danger" aria-label="Dejar de seguir"
+                        *ngIf="enableDeleteFollow(user._id)" (click)="onUnFollowUser(user._id)">
+                  <i class="fas fa-times"></i>
+                </button>
+                <button class="btn btn-outline-primary title-primary" aria-label="Perfil de usuario"><i
+                  class="fas fa-user"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-sidebar class="col-lg-4 d-none d-md-block"></app-sidebar>
+</div>
+

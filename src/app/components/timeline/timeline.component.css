@@ -1,0 +1,19 @@
+
+.image-label{
+
+    font-size: large;
+    font-weight: bold;
+}
+.user-image{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+.card{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fixcol.col-lg-4 {
+    position: relative;
+}

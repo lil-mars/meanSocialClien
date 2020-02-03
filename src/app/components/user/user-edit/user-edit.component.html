@@ -1,0 +1,55 @@
+<div class="col-lg-8 col-12">
+  <div class="h1-strong ">Actualizar mis datos</div>
+  <div class="alert alert-danger" *ngIf="status=='error'">
+    Error porfavor intentalo mas tarde
+  </div>
+  <div class="alert alert-success" *ngIf="status=='success'">
+    Actualizado correctamente
+  </div>
+  <form #userEditForm="ngForm" (ngSubmit)="onUpdate(userEditForm)">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="user.name" required>
+    </div>
+    <span class="text-danger" *ngIf="name && name.invalid && name.touched">
+      Nombre es obligatorio
+    </span>
+
+    <div class="form-group">
+      <label>Apellidos:</label>
+      <input type="text" class="form-control" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required>
+    </div>
+    <span class="text-danger" *ngIf="surname.invalid && surname.touched">
+      Apellidos son obligatorios
+    </span>
+
+    <div class="form-group">
+      <label>Nick:</label>
+      <input type="text" class="form-control" name="nick" #nick="ngModel" [(ngModel)]="user.nick" required>
+    </div>
+    <span class="text-danger" *ngIf="nick.invalid && nick.touched">
+      Nick es obligatorio
+    </span>
+
+    <div class="form-group">
+      <label>Correo electronico</label>
+      <input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="user.email" required email>
+    </div>
+    <span class="text-danger" *ngIf="email.invalid && email.touched">
+      Correo electronico invalido.
+    </span>
+    <p class="text-center">Cambiar avatar:</p>
+    <br>
+    <div *ngIf="user.image" class="col-lg-8 offset-lg-2 col-12">
+      <img src="{{ url + 'get-image-user/'+ user.image }}" class="img-fluid" alt="">
+    </div>
+    <br>
+    <div class="text-center">
+      <input class="" type="file" placeholder="image" (change)="onUploadFile($event)">
+      <br>
+      <input type="submit" value="Actualizar" class="btn btn-success mt-2 my-5" [disabled]="userEditForm.invalid">
+    </div>
+
+
+  </form>
+</div>

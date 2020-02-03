@@ -1,0 +1,41 @@
+<div class="row no-gutters" #scroll>
+    <div class="col-12 col-lg-8">
+        <h1 class="h1-strong">
+            Linea de tiempo
+            <button class="btn btn-outline-primary float-right mr-3" (click)="onRefresh()">Volver a cargar</button>
+        </h1>
+        <div class="card" *ngFor="let publication of publications">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 col-3 user">
+                        <div class="image-label">
+                            {{publication.user.nick | uppercase}}
+                        </div>
+                        <img [src]="getPathImage(publication.user.image)" alt="" class="user-image">
+                    </div>
+                    <div class="user-publication col-lg-8 col-9">
+                        <h5 class="card-title">{{ publication.user.getFullName() }}</h5>
+                        <p class="card-text">
+                            {{publication.text}}
+                        </p>
+                    </div>
+                    <div class="col-lg-2">
+                        <span class=" badge badge-warning">
+                        {{ publication.created_at | amLocale: 'es' |amTimeAgo }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="col-6 offset-3">
+            <button class="btn btn-primary btn-block"  *ngIf="page < pages">
+                Cargar mas
+            </button>
+        </div>
+    </div>
+    <div class="fixcol col-lg-4 col-12 ">
+        <app-sidebar (publicationCreated)="onRefresh()"></app-sidebar>
+    </div>
+</div>
+
