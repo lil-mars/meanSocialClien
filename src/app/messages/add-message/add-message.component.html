@@ -1,0 +1,25 @@
+<h3>Enviar mensaje</h3>
+
+<form #messageForm="ngForm" (ngSubmit)="onSend(messageForm)" class="col-lg-10">
+    <div class="alert alert-success" *ngIf="status === 'success'">Enviado correctamente</div>
+    <div class="alert alert-danger" *ngIf="status === 'error'">Error al enviar el mensaje</div>
+    <div class="form-group">
+        <label>Para</label>
+        <span *ngIf="receiver && receiver.invalid && receiver.touched" class="text-danger">
+            El campo no es valido
+        </span>
+        <select name="receiver" #receiver="ngModel" [(ngModel)]="message.receiver" class="form-control" required>
+            <option value="{{follow.user._id}}" *ngFor="let follow of follows" class="form-control">
+                {{ follow.user.name}} {{follow.user.surname}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Mensaje</label>
+        <span *ngIf="text && text.invalid && text.touched" class="text-danger">
+            El mensaje es invalido !
+        </span>
+        <textarea #text="ngModel" name="text" class="form-control" [(ngModel)]="message.text" cols="10" rows="5" required></textarea>
+    </div>
+    <input type="submit" class="btn btn-success" value="Enviar">
+</form>

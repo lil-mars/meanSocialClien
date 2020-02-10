@@ -1,0 +1,32 @@
+<div class="card" *ngFor="let publication of publications">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 col-3 user">
+                <div class="image-label">
+                    {{publication.user.nick | uppercase}}
+                </div>
+                <img [src]="getPathImage(publication.user.image)" alt="" class="user-image">
+                <br><br>
+                <span class="badge badge-warning">
+                        {{ publication.created_at | amLocale: 'es' |amTimeAgo }}
+                </span>
+            </div>
+            <div class="user-publication col-lg-9 col-9">
+                <h5 class="card-title">{{ publication.user.getFullName() }}</h5>
+                <p class="card-text">
+                    {{publication.text}}
+                </p>
+                <div *ngIf="publication.file! !== 'null'" class="col-10">
+                    <img [src]="getImagePath(publication.file)" alt="" style="width: 100%">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<div class="col-6 offset-3">
+    <button class="btn btn-primary btn-block" (click)="showMore()" *ngIf="page < pages">
+        Cargar mas
+    </button>
+</div>

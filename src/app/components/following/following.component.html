@@ -1,0 +1,46 @@
+<div class="row no-gutters">
+    <div class="col-12 col-lg-8">
+        <h1 class="h1-strong">
+            Usuarios seguidos por {{user.getFullName()}}
+        </h1>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <button class="page-link " routerLinkActive="active" [routerLink]="['../',previousPage]"
+                            [disabled]="page === 1"
+                    >Previous</button>
+                </li>
+                <li class="page-item">
+                    <button class="page-link" routerLinkActive="active" [routerLink]="['../',nextPage]"
+                       [disabled]="page === pages">Next</button>
+                </li>
+            </ul>
+        </nav>
+        <div class="people ml-3 mr-3">
+            <div class="row">
+                <div class="col-6 col-lg-3" *ngFor="let user of users">
+                    <div class="card">
+                        <img class="card-img-top"
+                             [src]="getPathImage(user.image)"
+                             alt="Card image" style="width: 100%; height: 250px">
+                        <div class="card-body ">
+                            <h6 class="card-title text-center font-weight-bold">{{user.nick | uppercase}}</h6>
+                            <a [routerLink]="['/profile', user._id]">{{user.getFullName()}}</a>
+                            <br><br>
+                            <div class="text-center">
+                                <button [routerLink]="['/profile', user._id]"
+                                        class="btn btn-outline-primary title-primary"
+                                        aria-label="Perfil de usuario"><i
+                                        class="fas fa-user"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-12">
+        <app-sidebar></app-sidebar>
+    </div>
+</div>

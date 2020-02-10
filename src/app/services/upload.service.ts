@@ -24,8 +24,16 @@ export class UploadService {
     const xhr = new XMLHttpRequest();
     formData.append(name, file, file.name);
 
-    console.log(formData);
     const headers = new HttpHeaders().set('Authorization', token);
     return this.http.post(this.apiUrl + 'upload-image-user/' + user._id, formData, {headers});
+  }
+  uploadImagePub(publicationId: string, file: File, token: string) {
+    const formData = new FormData();
+    // tslint:disable-next-line:prefer-for-of
+    const xhr = new XMLHttpRequest();
+    formData.append('image', file, file.name);
+
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.post(this.apiUrl + 'upload-image-pub/' + publicationId, formData, {headers});
   }
 }

@@ -1,80 +1,86 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-orange">
 
-  <a class="navbar-brand" routerLink="/home">
+    <a class="navbar-brand" routerLink="/home">
     <span class="fab fa-angellist" style="color: white">
     </span>
-    OurLife
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        OurLife
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" [class.justify-content-end]="!authenticatedUser" id="navbarText">
-      <!--   Navegador izquierdo -->
-      <ul class="navbar-nav mr-auto" *ngIf="authenticatedUser" >
-        <li class="nav-item">
-          <a class="nav-link" routerLink="home" routerLinkActive="active">
-            <span class="fa fa-home"></span>
-            Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="timeline" routerLinkActive="active">
-            <span class="fa fa-th-list"></span>
-            Linea de tiempo
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/people" routerLinkActive="active">
-            <span class="fa fa-user-friends"></span>
-            Gente
-          </a>
-        </li>
+    <div class="collapse navbar-collapse" [class.justify-content-end]="!authenticatedUser" id="navbarText">
+        <!--   Navegador izquierdo -->
+        <ul class="navbar-nav mr-auto" *ngIf="authenticatedUser">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="home" routerLinkActive="active">
+                    <span class="fa fa-home"></span>
+                    Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="timeline" routerLinkActive="active">
+                    <span class="fa fa-th-list"></span>
+                    Linea de tiempo
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/people" routerLinkActive="active">
+                    <span class="fa fa-user-friends"></span>
+                    Gente
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/messages" routerLinkActive="active">
+                  <i class="fa fa-envelope"></i>
+                    Mensajes
+                </a>
+            </li>
 
-      </ul>
-      <!--   Navegador izquierdo -->
-<!--      Authenticated navbar-->
-      <ul class="navbar-nav ml-auto"*ngIf="authenticatedUser">
-        <li class="nav-item">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">
-            <img src="{{ url + 'get-image-user/'+ authenticatedUser.image }}" class="avatar" alt="">
-            {{authenticatedUser.getFullName() }}
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">
-              <i class="fas fa-male"></i>
-              Mi perfil
-            </a>
-            <a class="dropdown-item pointer" routerLink="/my-data">
-              <i class="fas fa-database"></i>
-              Mis datos
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item pointer" (click)="onLogOut()">
-              <i class="fas fa-sign-out-alt"></i>
-              Cerrar sesion
-            </a>
-          </div>
-        </li>
-      </ul>
+        </ul>
+        <!--   Navegador izquierdo -->
+        <!--      Authenticated navbar-->
+        <ul class="navbar-nav ml-auto" *ngIf="authenticatedUser">
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ url + 'get-image-user/'+ authenticatedUser.image }}" class="avatar" alt="">
+                    {{authenticatedUser.getFullName() }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-male"></i>
+                        Mi perfil
+                    </a>
+                    <a class="dropdown-item pointer" routerLink="/my-data">
+                        <i class="fas fa-database"></i>
+                        Mis datos
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item pointer" (click)="onLogOut()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar sesion
+                    </a>
+                </div>
+            </li>
+        </ul>
 
 
-    <ul class="navbar-nav" *ngIf="!authenticatedUser">
-      <li class="nav-item nav-fill" >
-        <a class="nav-link " routerLink="/login" routerLinkActive="active">
-          <span class="fa fa-sign-in-alt"></span>
-          Ingresar
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " routerLink="/register" routerLinkActive="active">
-          <span class="fas fa-user-edit"></span>
-          Registro
-        </a>
-      </li>
-    </ul>
-  </div>
+        <ul class="navbar-nav" *ngIf="!authenticatedUser">
+            <li class="nav-item nav-fill">
+                <a class="nav-link " routerLink="/login" routerLinkActive="active">
+                    <span class="fa fa-sign-in-alt"></span>
+                    Ingresar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " routerLink="/register" routerLinkActive="active">
+                    <span class="fas fa-user-edit"></span>
+                    Registro
+                </a>
+            </li>
+        </ul>
+    </div>
 
 </nav>

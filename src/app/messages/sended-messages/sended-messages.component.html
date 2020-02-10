@@ -1,0 +1,40 @@
+<div class="col-12">
+    <h3>Mensajes enviados</h3>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button class="page-link " routerLinkActive="active" [routerLink]="['../',previousPage]"
+                        [disabled]="page === 1"
+                >Previous</button>
+            </li>
+            <li class="page-item">
+                <button class="page-link" routerLinkActive="active" [routerLink]="['../',nextPage]"
+                        [disabled]="page === pages">Next</button>
+            </li>
+        </ul>
+    </nav>
+    <div class="card" *ngFor="let message of messages">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-2 col-4 user">
+                    <div class="image-label">
+                        {{message.emitter.nick | uppercase}}
+                    </div>
+                    <img [src]="getPathImage(message.emitter.image)" alt="" class="user-image">
+                    <br><br>
+                    <span class="badge badge-warning">
+                        {{ message.created_at | amFromUnix |amLocale: 'es' |amTimeAgo }}
+                    </span>
+                </div>
+                <div class="user-publication col-lg-10 col-8">
+                    <h5 class="card-title">{{ message.emitter.name }} {{ message.emitter.surname}}
+                        | Enviado a: <b>{{ message.receiver.name }} {{ message.receiver.surname}}</b> </h5>
+                    <p class="card-text">
+                        {{message.text}}
+                    </p>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

@@ -14,22 +14,57 @@
                         <img [src]="getPathImage(publication.user.image)" alt="" class="user-image">
                     </div>
                     <div class="user-publication col-lg-8 col-9">
-                        <h5 class="card-title">{{ publication.user.getFullName() }}</h5>
+                        <a class="card-title"
+                           [routerLink]="['/profile', publication.user._id]">{{ publication.user.getFullName() }}</a>
                         <p class="card-text">
                             {{publication.text}}
                         </p>
+                        <div *ngIf="publication.file! !== 'null'" class="col-12">
+                            <img [src]="getImagePath(publication.file)" alt="" style="width: 100%">
+                        </div>
                     </div>
                     <div class="col-lg-2">
                         <span class=" badge badge-warning">
                         {{ publication.created_at | amLocale: 'es' |amTimeAgo }}
                         </span>
+                        <a class="btn btn-block btn-danger text-white"
+                           *ngIf="publication.user._id === authenticatedUser._id"
+                           data-toggle="modal" href="#deleteModal{{publication._id}}"
+                        >
+                            Eliminar
+                        </a>
+                        <!--                        DELETE MODAL-->
+                        <div class="modal fade" id="deleteModal{{publication._id}}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar publicacion</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Si borras la publicacion no podras recuperarla. </h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar
+                                        </button>
+                                        <button type="button" data-dismiss="modal"
+                                                class="btn btn-danger"
+                                                (click)="onDeletePublication(publication._id)">Aceptar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <br>
         <div class="col-6 offset-3">
-            <button class="btn btn-primary btn-block"  *ngIf="page < pages">
+            <button class="btn btn-primary btn-block" (click)="showMore()" *ngIf="page < pages">
                 Cargar mas
             </button>
         </div>

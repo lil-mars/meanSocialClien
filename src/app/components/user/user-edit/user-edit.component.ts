@@ -14,7 +14,7 @@ export class UserEditComponent implements OnInit {
   public user: User;
   public token: string;
   public status: string;
-  files: File;
+  file: File;
   public url = environment.apiUrl;
 
   constructor(
@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit {
           if (response.user) {
             this.status = 'success';
             this.uploadService
-              .makeFileRequest(response.user, this.files, this.token, 'image').subscribe(
+              .makeFileRequest(response.user, this.file, this.token, 'image').subscribe(
               res => {
                 this.user.image = res.user.image;
                 console.log(this.user);
@@ -62,7 +62,7 @@ export class UserEditComponent implements OnInit {
 
 
   onUploadFile($event: any) {
-    this.files = $event.target.files[0];
-    console.log(this.files);
+    this.file = $event.target.files[0];
+    console.log(this.file);
   }
 }

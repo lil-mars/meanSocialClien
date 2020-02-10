@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row no-gutters">
 
   <div class="col-12 col-lg-8">
     <h1 class="h1-strong">
@@ -14,7 +14,7 @@
         </li>
       </ul>
     </nav>
-    <div class="people ml-4">
+    <div class="people ml-3 mr-3">
       <div class="row">
         <div class="col-6 col-lg-3" *ngFor="let user of users">
           <div class="card">
@@ -23,7 +23,8 @@
                  alt="Card image" style="width: 100%; height: 250px">
             <div class="card-body ">
               <h6 class="card-title text-center font-weight-bold">{{user.nick | uppercase}}</h6>
-              <p class="">{{user.getFullName() }}</p>
+              <a [routerLink]="['/profile', user._id]">{{user.getFullName() }}</a>
+              <br><br>
               <div class="text-center">
                 <button class="btn btn-outline-success mr-1 title-success"
                         [disabled]="user._id === authenticatedUser._id"
@@ -35,7 +36,7 @@
                         *ngIf="enableDeleteFollow(user._id)" (click)="onUnFollowUser(user._id)">
                   <i class="fas fa-times"></i>
                 </button>
-                <button class="btn btn-outline-primary title-primary" aria-label="Perfil de usuario"><i
+                <button class="btn btn-outline-primary title-primary" [routerLink]="['/profile', user._id]" aria-label="Perfil de usuario"><i
                   class="fas fa-user"></i></button>
               </div>
             </div>

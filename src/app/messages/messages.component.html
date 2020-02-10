@@ -1,0 +1,23 @@
+    <div class="row mt-4 no-gutters">
+        <div class="col-lg-3 col-3">
+            <nav class="nav nav-pills flex-column ml-2">
+                <a href="#" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/messages', 'received']">
+                    <i class="far fa-comment-dots"></i>
+                    Mensajes recibidos
+                </a>
+                <a href="#" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/messages', 'sended', '1']">
+                    <i class="fas fa-comment"></i>
+                    Mensajes enviados
+                </a>
+                <a href="#" class="nav-item nav-link" routerLinkActive="active" [routerLink]="['/messages', 'send']">
+                    <i class="fa fa-envelope"></i> Enviar mensaje
+                </a>
+
+            </nav>
+        </div>
+
+        <div class="col-lg-9 col-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+

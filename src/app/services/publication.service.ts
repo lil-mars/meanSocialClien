@@ -46,13 +46,6 @@ export class PublicationService {
 
                     publication.user = publisher;
                 });
-                // Sorting our list
-                // let newList: Publication[];
-                // newList = [];
-                // for (let index = response.publications.length - 1; index >= 0; index--) {
-                //     newList.push(response.publications[index]);
-                // }
-                // response.publications = newList;
                 return response;
             }));
     }
@@ -63,4 +56,31 @@ export class PublicationService {
             .set('Content-Type', 'application/json');
         return this.http.delete(this.apiUrl + 'publication/' + id, {headers});
     }
+
+    getUserPublications(token: string, userId: string, page = 1): Observable<any> {
+        const headers = new HttpHeaders()
+            .set('Authorization', token)
+            .set('Content-Type', 'application/json');
+        return this.http
+            .get<{ user: User, publications: Publication[] }>(this.apiUrl + 'user-publications/' + userId + '/' + page,
+                {headers}).pipe(map((response) => {
+                    response.publications.forEach(publication => {
+                        const publisher = new User(
+                            publication.user._id,
+                            publication.user.name,
+                            publication.user.surname,
+                            publication.user.nick,
+                            publication.user.email,
+                            null,
+                            null,
+                            publication.user.image,
+                        );
+
+                        publication.user = publisher;
+                    });
+                    return response;
+                }
+            ));
+    }
+
 }

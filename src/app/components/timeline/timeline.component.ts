@@ -43,7 +43,6 @@ export class TimelineComponent implements OnInit {
     getPublications(page, bind = false) {
         this.publicationService.getPublications(this.authenticatedToken, page).subscribe(
             response => {
-                console.log(response);
                 if (!bind) {
                     this.publications = response.publications;
                 } else {
@@ -67,14 +66,27 @@ export class TimelineComponent implements OnInit {
     }
 
 
-    showMore(scroll: ElementRef) {
+    showMore() {
         this.getPublications(++this.page, true);
-        // tslint:disable-next-line:no-unused-expression
-        scroll.nativeElement.scrollTop = scroll.nativeElement.scrollHeight;
     }
 
     onRefresh() {
         this.page = 1;
         this.getPublications(this.page);
+    }
+
+    getImagePath(file: string) {
+        return this.apiUrl + 'get-image-pub/' + file;
+    }
+
+    onDeletePublication(id: string) {
+        this.publicationService.deletePublication(this.authenticatedToken, id).subscribe(
+            response => {
+                this.onRefresh();
+            }, error => {
+                console.log(error);
+            }
+        );
+
     }
 }

@@ -15,6 +15,12 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MomentModule } from 'ngx-moment';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { PublicationComponent } from './components/publication/publication.component';
+import { FollowingComponent } from './components/following/following.component';
+import { FollowedComponent } from './components/followed/followed.component';
+import { MessagesModule } from './messages/messages.module';
+import { UserGuard } from './services/user.guard';
 
 @NgModule({
     declarations: [
@@ -26,16 +32,24 @@ import { MomentModule } from 'ngx-moment';
         UserEditComponent,
         UserListComponent,
         SidebarComponent,
-        TimelineComponent
+        TimelineComponent,
+        UserProfileComponent,
+        UserProfileComponent,
+        PublicationComponent,
+        FollowingComponent,
+        FollowedComponent
     ],
     imports: [
         BrowserModule,
+        MessagesModule,
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        MomentModule
+        MomentModule,
     ],
-    providers: [],
+    providers: [
+        UserGuard
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

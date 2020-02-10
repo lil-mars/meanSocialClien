@@ -1,0 +1,62 @@
+<div class="row no-gutters">
+    <div class="col-lg-8 col-12 ">
+        <h1 class="h1-strong">Perfil</h1>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <h2 class="font-weight-bold">{{ user.nick | uppercase}}</h2>
+                            <img class="profile-user-img img-fluid img-circle"
+                                 [src]="getPathImage(user.image)"
+                                 alt="User profile picture">
+                            <span class="badge badge-success float-right m-1" *ngIf="followed"> Te sigue</span>
+                        </div>
+                        <br><br>
+                        <h3 class="profile-username text-center">{{user.getFullName()}}</h3>
+
+                        <ul class="list-group mb-3" *ngIf="stats">
+                            <li class="list-group-item list-group-item-action"
+                                [routerLink]="['/user-followers',user._id, '1']">
+                                <b>Seguidores</b>
+                                <a class="float-right">
+                                    {{ stats.followed }}
+                                </a>
+                            </li>
+                            <li class="list-group-item list-group-item-action"
+                                [routerLink]="['/followed-users',user._id,'1']">
+                                <b>Siguiendo</b>
+                                <a class="float-right">
+                                    {{ stats.following}}
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Publicaciones</b>
+                                <a class="float-right">
+                                    {{ stats.publications}}
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div *ngIf="authenticatedUser._id !== user._id">
+                            <button class="btn btn-primary btn-block"
+                                    (click)="onFollowUser(user._id)"
+                                    *ngIf="!following">
+                                <b>Seguir</b>
+                            </button>
+                            <button class="btn btn-danger btn-block"
+                                    (click)="onUnFollowUser(user._id)"
+                                    *ngIf="following">
+                                <b>Dejar de seguir</b>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <app-publication class="col-lg-8" [token]="token" [userId]="userId"></app-publication>
+        </div>
+
+    </div>
+    <app-sidebar class="col-lg-4 col-12"></app-sidebar>
+</div>

@@ -6,6 +6,10 @@ import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { FollowingComponent } from './components/following/following.component';
+import { FollowedComponent } from './components/followed/followed.component';
+import { UserGuard } from './services/user.guard';
 
 const routes: Routes = [
     {
@@ -18,19 +22,28 @@ const routes: Routes = [
         path: 'register', component: RegisterComponent
     },
     {
-        path: 'home', component: HomeComponent
+        path: 'home', component: HomeComponent, canActivate: [UserGuard]
     },
     {
-        path: 'my-data', component: UserEditComponent
+        path: 'my-data', component: UserEditComponent, canActivate: [UserGuard]
     },
     {
-        path: 'people', component: UserListComponent
+        path: 'people', component: UserListComponent , canActivate: [UserGuard]
     },
     {
-        path: 'timeline', component: TimelineComponent
+        path: 'timeline', component: TimelineComponent, canActivate: [UserGuard]
     },
     {
-        path: 'people/:page', component: UserListComponent
+        path: 'followed-users/:id/:page', component: FollowingComponent , canActivate: [UserGuard]
+    },
+    {
+        path: 'user-followers/:id/:page', component: FollowedComponent, canActivate: [UserGuard]
+    },
+    {
+        path: 'profile/:id', component: UserProfileComponent, canActivate: [UserGuard]
+    },
+    {
+        path: 'people/:page', component: UserListComponent , canActivate: [UserGuard]
     },
     {
         path: '**', redirectTo: '/home'

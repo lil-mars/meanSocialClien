@@ -1,46 +1,50 @@
-<div class="card">
-  <div class="card-header text-center">
-    <h3 class="font-weight-bold">{{ authenticatedUser.nick | uppercase}}</h3>
-    <img class="card-img-top img-thumbnail " [src]="getPathImage(authenticatedUser.image)" alt="Card image cap">
-  </div>
-  <div class="card-body bg-secondary text-white">
-    <h3 class="font-weight-bold">Estadisticas</h3>
-    <div class="btn-group">
-      <button type="button" class="btn btn-outline-dark">
-        Siguiendo
-        <span class="badge badge-dark">
-          {{ stats.following }}
-        </span>
-      </button>
-      <button type="button" class="btn btn-outline-dark">
-        Seguidores
-        <span class="badge badge-dark ">
-          {{ stats.followed }}
-        </span>
-      </button>
-      <button type="button" class="btn btn-outline-dark">
-        Publicaciones
-        <span class="badge badge-dark">
+<div class="card" *ngIf="authenticatedUser">
+    <div class="card-header text-center">
+        <h3 [routerLink]="['/profile', authenticatedUser._id]"
+            class="font-weight-bold text-danger pointer">{{ authenticatedUser.nick | uppercase}}</h3>
+        <img class="card-img-top img-thumbnail" *ngIf="authenticatedUser.image"
+             [src]="getPathImage(authenticatedUser.image)">
+    </div>
+    <div class="card-body bg-secondary text-white">
+        <h3 class="font-weight-bold">Estadisticas</h3>
+        <div class="btn-group" *ngIf="stats">
+            <button type="button" class="btn btn-outline-dark"
+                    [routerLink]="['/followed-users',authenticatedUser._id,'1']">
+                Siguiendo
+                <span class="badge badge-dark">
+                  {{ stats.following }}
+                </span>
+            </button>
+            <button type="button" class="btn btn-outline-dark"
+                    [routerLink]="['/user-followers',authenticatedUser._id, '1']">
+                Seguidores
+                <span class="badge badge-dark ">
+                    {{ stats.followed }}
+                </span>
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+                Publicaciones
+                <span class="badge badge-dark">
           {{ stats.publications }}
         </span>
-      </button>
+            </button>
+        </div>
+        <br><br>
+        <form #publicationForm="ngForm" (ngSubmit)="onPublish(publicationForm)">
+            <div class="alert alert-success" *ngIf="status === 'success'">
+                Publicado correctamente !
+            </div>
+            <div class="alert alert-danger" *ngIf="status === 'error'">
+                Error al publicar !
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">En que piensas hoy ?</label>
+                <textarea name="text" ngModel cols="10" rows="5" class="form-control"></textarea>
+            </div>
+            <input type="file" ngModel name="file" (change)="fileChangeEvent($event)">
+            <br><br>
+            <input type="submit" class="btn btn-outline-dark" [disabled]="publicationForm.invalid" value="Publicar">
+        </form>
     </div>
-    <br><br>
-    <form #publicationForm="ngForm" (ngSubmit)="onPublish(publicationForm)">
-      <div class="alert alert-success"  *ngIf="status === 'success'">
-        Publicado correctamente !
-      </div>
-      <div class="alert alert-danger" *ngIf="status === 'error'">
-        Error al publicar !
-      </div>
-      <div class="form-group">
-        <label class="font-weight-bold">En que piensas hoy ?</label>
-        <textarea name="text" ngModel  cols="10" rows="5" class="form-control"></textarea>
-      </div>
-      <input type="file" ngModel name="file" >
-      <br><br>
-      <input type="submit" class="btn btn-outline-dark" [disabled]="publicationForm.invalid" value="Publicar">
-    </form>
-  </div>
 
 </div>
